@@ -1,0 +1,28 @@
+name: Environment Variables 
+
+on: 
+  workflow_dispatch:
+
+env:
+  WORKFLOW_VAR: "I am a global variable"
+
+jobs:
+    job-1:
+        runs-on: ubuntu-24.04
+        env:
+          JOB_VAR: "I am a job-level variable"
+        steps:
+          - name: Inspect scope of environment variables in Job 1
+            env:
+                STEP_VAR: "I am a step-level variable"
+            run: |
+                echo "Global Variable: $GLOBAL_VAR"
+                echo "Job-level Variable: $JOB_VAR"
+                echo "Step-level Variable: $STEP_VAR"
+
+          - name: Inspect scope of environment variables in Job 1 - Step 2
+            run: |
+                echo "Global Variable: $GLOBAL_VAR"
+                echo "Job-level Variable: $JOB_VAR"
+                echo "Step-level Variable: $STEP_VAR"  # This will be empty
+    
