@@ -4,20 +4,20 @@ on:
 
 jobs:
 
-   say-hello-to-bash:
-     runs-on: ubuntu-24.04
-     steps:
-       - run: echo "Hello Wrold"
+  say-hello-to-bash:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "Hello Wrold"
 
-   say-hello-using-shell:
-     runs-on: ubuntu-24.04
-     steps:
-       - run: print("Hello World!")
-         shell: python 
+  say-hello-using-shell:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: print("Hello World!")
+        shell: python 
 
-   say-hello-action:
-     runs-on: ubuntu-24.04
-     steps:
-       - uses: actions/hello-world-javascript-action@v1
-         with: 
-           who-to-greet: "world"
+  say-hello-action:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/hello-world-javascript-action@v1
+        with: 
+          who-to-greet: "world"

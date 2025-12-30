@@ -1,0 +1,28 @@
+name: Triggering Events
+
+on:
+    push:
+        branches:
+            - "main"
+            - "testing"
+
+    pull_request:
+        types:
+            - opened
+            - synchronize
+            - reopened
+        paths:
+            #included markdown files
+            - "**/*.md"
+            #excluded files in docs folder
+            - "**/*.txt"
+    
+    workflow_dispatch:
+
+
+
+jobs:
+    echo-event:
+        runs-on: ubuntu-24.04
+        steps:
+            - run: echo "This workflow was triggered by a push or pull request event or manually via workflow_dispatch"
