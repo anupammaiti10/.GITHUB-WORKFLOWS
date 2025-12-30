@@ -20,6 +20,9 @@ jobs:
      needs:
        - job-1
        - job-2
+     steps:
+       - run: echo "this is the third workflow that needs two jobs"
+      
 
   job-4:
      runs-on: ubuntu-24.04
