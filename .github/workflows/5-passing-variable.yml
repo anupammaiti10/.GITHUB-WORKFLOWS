@@ -1,0 +1,12 @@
+name: Passing Varibales
+
+on:
+    workflow_dispatch:
+
+jobs:
+    producer:
+        runs-on: ubuntu-24.04
+        steps:
+            - name: Set an output variable
+              id: set_output
+              run: echo "MY_VAR=Hello from producer job!" >> $GITHUB_OUTPUT
