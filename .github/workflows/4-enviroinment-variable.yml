@@ -16,7 +16,7 @@ jobs:
             env:
                 STEP_VAR: "I am a step-level variable"
             run: |
-                echo "Global Variable: $GLOBAL_VAR"
+                echo "Global Variable: $WORKFLOW_VAR"
                 echo "Job-level Variable: $JOB_VAR"
                 echo "Step-level Variable: $STEP_VAR"
 
