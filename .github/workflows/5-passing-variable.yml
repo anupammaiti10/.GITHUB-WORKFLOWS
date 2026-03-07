@@ -7,17 +7,32 @@ jobs:
     producer:
         runs-on: ubuntu-24.04
         outputs:
-            foo: ${{steps.generate-var.outputs.foo}}
+            foo: ${{steps.generate-var.outputs.name}}
         steps:
             - name: Generate Variable
               id: generate-var
               run: |
-                foo=bar
+                name=bar
                 # Step 1: Set the variable as an output
 
-                echo "foo=${foo}">>"$GITHUB_OUTPUT"  
+                echo "name=$name">>"$GITHUB_OUTPUT"  
                 # Step 2: Print the variable to the console
-                echo "Generated variable: ${foo}"
+                echo "Generated variable: $name"
                 # Step 3: Set the variable as an environment variable for subsequent steps
-                echo "FOO=${foo}" >> $GITHUB_ENV 
+                echo "FOO=$name" >> $GITHUB_ENV 
+
+            - name: Print Variable in Producer
+              run: |
+                echo "Github outputs variable: ${{steps.generate-var.outputs.name}}"
+                echo "Githun environment variable: $FOO"
+
+
+    consumer:
+        runs-on: ubuntu-24.04
+        needs: producer
+        steps:
+            - name: Print Variable in Consumer
+              run: |
+                echo "github outputs variable from producer: ${{needs.producer.outputs.foo}}"
+                echo "github environment variable from producer: $FOO"  # This will be empty since environment variables are not shared across jobs
             
