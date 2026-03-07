@@ -8,14 +8,15 @@ jobs:
     artifacts-producer:
         runs-on: Windows-2022
         steps:
+            # The create-artifact action is used to create an artifact that you want to share between jobs. You need to specify a name for the artifact and the path to the file or directory that you want to create.
             - name: Create a artifacts file
               run: |
                   echo "This is the artifacts file to store the data between the jobs" > artifacts.txt
                   echo "This data are stored on ${date}" >> artifacts.txt
 
-
+            # The upload-artifact action is used to upload the artifact that you want to share between jobs. You need to specify a name for the artifact and the path to the file or directory that you want to upload.
             - name: Upload the artifacts file
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                   name: artifacts-file-Upload
                   path: artifacts.txt
@@ -24,11 +25,12 @@ jobs:
         runs-on: Windows-2022
         needs: artifacts-producer
         steps:
+            # The download-artifact action is used to download the artifact that was uploaded in the previous job. You need to specify the name of the artifact that you want to download, which should match the name used in the upload step.
             - name: Download the artifacts file
-              uses: actions/download-artifact@v3
+              uses: actions/download-artifact@v5
               with:
                   name: artifacts-file-Upload
-
+    # The downloaded artifact will be available in the default directory, which is the root of the repository. You can specify a different path if needed.
             - name: Cat the content inside the artifacts file
               run: |
                   cat artifacts.txt
