@@ -2,6 +2,8 @@ name: Triggering Events
 
 on:
     push:
+        paths:
+            - "3-triggering-workflow.yml"
         branches:
             - "main"
             - "testing"
@@ -18,8 +20,6 @@ on:
             - "!**/../**/*.txt"
     
     workflow_dispatch:
-
-
 
 jobs:
     echo-event:
